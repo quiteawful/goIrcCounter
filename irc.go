@@ -50,19 +50,19 @@ func parseIrcMsg(e *irc.Event) {
 		// Joins
 		ctxIrc.WriteToChannel("==Joins==")
 		ctxIrc.WriteToChannel("#  -  Name")
-		for k, v := sort range score.Joins {
+		for k, v := range score.Joins {
 			ctxIrc.WriteToChannel(strconv.Itoa(v) + "  " + k)
 		}
 		// Parts
 		ctxIrc.WriteToChannel("==Parts==")
 		ctxIrc.WriteToChannel("#  -  Name")
-		for k, v := sort range score.Parts {
+		for k, v := range score.Parts {
 			ctxIrc.WriteToChannel(strconv.Itoa(v) + "  " + k)
 		}
 		// Quits
 		ctxIrc.WriteToChannel("==Quits==")
 		ctxIrc.WriteToChannel("#  -  Name")
-		for k, v := sort range score.Quits {
+		for k, v := range score.Quits {
 			ctxIrc.WriteToChannel(strconv.Itoa(v) + "  " + k)
 		}
 	}
