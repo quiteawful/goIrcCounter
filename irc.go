@@ -73,9 +73,12 @@ func count(e *irc.Event) {
 	switch {
 	case code == "JOIN":
 		score.AddJoin(user)
+		fmt.Println(user + " joined.")
 	case code == "PART":
 		score.AddPart(user)
+		fmt.Println(user + " parted.")
 	case code == "QUIT":
 		score.AddQuit(user)
+		fmt.Println(user + " quit.")
 	}
 }
