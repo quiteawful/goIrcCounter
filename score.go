@@ -53,5 +53,5 @@ func mapNickName(user string) string {
 		}
 	}
 	// nix gefunden
-	return "deine Mama"
+	return user
 }

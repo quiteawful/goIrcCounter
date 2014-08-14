@@ -71,6 +71,8 @@ func count(e *irc.Event) {
 	user := e.Nick
 	code := e.Code
 
+	user = mapNickName(user)
+
 	switch {
 	case code == "JOIN":
 		score.AddJoin(user)
