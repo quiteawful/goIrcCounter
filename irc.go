@@ -19,8 +19,8 @@ func (i *Irc) Run() {
 	score = &Score{}
 	score.New()
 
-	i.Con = irc.IRC("Datenkrake", "Datenkrake")
-	i.Con.VerboseCallbackHandler = true
+	i.Con = irc.IRC("Counter", "Datenkrake")
+	i.Con.VerboseCallbackHandler = false
 	i.Con.UseTLS = true
 	i.Con.TLSConfig = &tls.Config{InsecureSkipVerify: true}
 	i.Con.Connect(i.Network + ":" + strconv.Itoa(i.Port))
@@ -48,20 +48,18 @@ func parseIrcMsg(e *irc.Event) {
 
 	if content == "!score" {
 		// Joins
-		ctxIrc.WriteToChannel("==Joins==")
 		ctxIrc.WriteToChannel("#  -  Name")
+		ctxIrc.WriteToChannel("==Joins==")
 		for k, v := range score.Joins {
 			ctxIrc.WriteToChannel(strconv.Itoa(v) + "  " + k)
 		}
 		// Parts
 		ctxIrc.WriteToChannel("==Parts==")
-		ctxIrc.WriteToChannel("#  -  Name")
 		for k, v := range score.Parts {
 			ctxIrc.WriteToChannel(strconv.Itoa(v) + "  " + k)
 		}
 		// Quits
 		ctxIrc.WriteToChannel("==Quits==")
-		ctxIrc.WriteToChannel("#  -  Name")
 		for k, v := range score.Quits {
 			ctxIrc.WriteToChannel(strconv.Itoa(v) + "  " + k)
 		}
