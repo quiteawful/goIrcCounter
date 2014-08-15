@@ -21,7 +21,7 @@ func (i *Irc) Run() {
 	score = &Score{}
 	score.New()
 
-	i.Con = irc.IRC("Datenkrake", "Datenkrake")
+	i.Con = irc.IRC("Counter", "Datenkrake")
 	i.Con.VerboseCallbackHandler = false
 	i.Con.UseTLS = true
 	i.Con.TLSConfig = &tls.Config{InsecureSkipVerify: true}
@@ -67,15 +67,18 @@ func parseIrcMsg(e *irc.Event) {
 	}
 
 	// control bot
-	if p[0] == "!join" && len(p) == 2 && e.Nick == "marduk" {
+	if p[0] == "!join" && len(p) == 2 && isMod(e.Nick) {
 		ctxIrc.Con.Join(p[1])
 		return
 	}
-	if p[0] == "!part" && len(p) == 2 && e.Nick == "marduk" {
+	if p[0] == "!part" && len(p) == 2 && isMod(e.Nick) {
 		ctxIrc.Con.Part(p[1])
 		return
 	}
-
+	if p[0] == "!nick" && len(p) == 2 && isMod(e.Nick) {
+		ctxIrc.Con.Nick(p[1])
+		return
+	}
 }
 
 func count(e *irc.Event) {
@@ -106,4 +109,14 @@ func printTable(name string, tbl map[string]int) {
 	for _, v := range sorted {
 		ctxIrc.WriteToChannel(strconv.Itoa(v.Value) + "  " + v.Key)
 	}
+}
+
+func isMod(user string) bool {
+	mods := []string{"marduk", "soda", "aimless", "nut"}
+	for _, v := range mods {
+		if v == user {
+			return true
+		}
+	}
+	return false
 }
