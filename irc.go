@@ -111,6 +111,10 @@ func printTable(name string, tbl map[string]int) {
 	}
 }
 
+func printRow(name string, tbl map[string]int) {
+	return
+}
+
 func isMod(user string) bool {
 	mods := []string{"marduk", "soda", "aimless", "nut"}
 	for _, v := range mods {
